@@ -1,0 +1,40 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: performance-api
+  
+  # Simple in-memory H2 database
+  datasource:
+    url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    driverClassName: org.h2.Driver
+    username: sa
+    password: 
+  
+  # Enable H2 console for easy database inspection
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+  
+  # JPA configuration for automatic table creation and data loading
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: false
+    defer-datasource-initialization: true
+    properties:
+      hibernate:
+        format_sql: true
+  
+  # Disable automatic SQL script execution to avoid duplicate key errors
+  sql:
+    init:
+      mode: never
+  
+# Simple logging configuration
+logging:
+  level:
+    com.performance.api: INFO
+    org.springframework.web: INFO

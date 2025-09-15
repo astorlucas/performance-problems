@@ -1,0 +1,67 @@
+{
+	"id": "performance-api-environment",
+	"name": "Performance API Environment",
+	"values": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:8080",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "userId",
+			"value": "1",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "productId",
+			"value": "1",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "orderId",
+			"value": "1",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "searchKeyword",
+			"value": "test",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "category",
+			"value": "Electronics",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "minPrice",
+			"value": "10",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "maxPrice",
+			"value": "1000",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "minAmount",
+			"value": "100",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "emailDomain",
+			"value": "example.com",
+			"type": "default",
+			"enabled": true
+		}
+	],
+	"_postman_variable_scope": "environment"
+}

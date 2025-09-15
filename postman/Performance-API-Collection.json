@@ -1,0 +1,772 @@
+{
+	"info": {
+		"_postman_id": "performance-api-collection",
+		"name": "Performance API Collection",
+		"description": "Complete collection to test all endpoints of the Spring Boot performance API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Users API",
+			"item": [
+				{
+					"name": "Get All Users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/users",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "users"]
+						},
+						"description": "Gets all users (with performance issues - N+1 queries)"
+					},
+					"response": []
+				},
+				{
+					"name": "Get User by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/users/{{userId}}",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "users", "{{userId}}"]
+						},
+						"description": "Gets a user by ID (loads related data unnecessarily)"
+					},
+					"response": []
+				},
+				{
+					"name": "Create User",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"username\": \"testuser\",\n  \"email\": \"test@example.com\",\n  \"firstName\": \"Test\",\n  \"lastName\": \"User\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/users",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "users"]
+						},
+						"description": "Creates a new user (generates large profile data unnecessarily)"
+					},
+					"response": []
+				},
+				{
+					"name": "Update User",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"username\": \"updateduser\",\n  \"email\": \"updated@example.com\",\n  \"firstName\": \"Updated\",\n  \"lastName\": \"User\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/users/{{userId}}",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "users", "{{userId}}"]
+						},
+						"description": "Updates a user (reloads data unnecessarily)"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete User",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/users/{{userId}}",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "users", "{{userId}}"]
+						},
+						"description": "Deletes a user (processes data before deletion)"
+					},
+					"response": []
+				},
+				{
+					"name": "Search Users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/users/search?keyword={{searchKeyword}}",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "users", "search"],
+							"query": [
+								{
+									"key": "keyword",
+									"value": "{{searchKeyword}}"
+								}
+							]
+						},
+						"description": "Searches users (multiple database queries)"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Users with Pending Orders",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/users/pending-orders",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "users", "pending-orders"]
+						},
+						"description": "Gets users with pending orders (loads all related data)"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Recent Users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/users/recent?emailDomain={{emailDomain}}",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "users", "recent"],
+							"query": [
+								{
+									"key": "emailDomain",
+									"value": "{{emailDomain}}"
+								}
+							]
+						},
+						"description": "Gets recent users by email domain (loads unnecessary data)"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Cached Users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/users/cached",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "users", "cached"]
+						},
+						"description": "Gets cached users (may cause memory leak)"
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Users Async",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/users/async",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "users", "async"]
+						},
+						"description": "Gets users asynchronously (may cause resource exhaustion)"
+					},
+					"response": []
+				},
+				{
+					"name": "User Health Check",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/users/health",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "users", "health"]
+						},
+						"description": "Checks the status of the user service"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Products API",
+			"item": [
+				{
+					"name": "Get All Products",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/products",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "products"]
+						},
+						"description": "Gets all products (with performance issues - N+1 queries)"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Product by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/products/{{productId}}",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "products", "{{productId}}"]
+						},
+						"description": "Gets a product by ID (loads related data unnecessarily)"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Product",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Test Product\",\n  \"description\": \"Test Description\",\n  \"price\": 99.99,\n  \"category\": \"Test Category\",\n  \"stockQuantity\": 100\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/products",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "products"]
+						},
+						"description": "Creates a new product (generates large image data unnecessarily)"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Product",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Updated Product\",\n  \"description\": \"Updated Description\",\n  \"price\": 149.99,\n  \"category\": \"Updated Category\",\n  \"stockQuantity\": 50\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/products/{{productId}}",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "products", "{{productId}}"]
+						},
+						"description": "Updates a product (reloads data unnecessarily)"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Product",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/products/{{productId}}",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "products", "{{productId}}"]
+						},
+						"description": "Deletes a product (processes data before deletion)"
+					},
+					"response": []
+				},
+				{
+					"name": "Search Products",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/products/search?keyword={{searchKeyword}}",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "products", "search"],
+							"query": [
+								{
+									"key": "keyword",
+									"value": "{{searchKeyword}}"
+								}
+							]
+						},
+						"description": "Searches products (multiple database queries)"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Products by Category",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/products/category/{{category}}",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "products", "category", "{{category}}"]
+						},
+						"description": "Gets products by category (loads all related data)"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Products by Price Range",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/products/price-range?minPrice={{minPrice}}&maxPrice={{maxPrice}}",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "products", "price-range"],
+							"query": [
+								{
+									"key": "minPrice",
+									"value": "{{minPrice}}"
+								},
+								{
+									"key": "maxPrice",
+									"value": "{{maxPrice}}"
+								}
+							]
+						},
+						"description": "Gets products by price range (loads unnecessary data)"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Available Products",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/products/available",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "products", "available"]
+						},
+						"description": "Gets available products (loads all related data)"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Products with Images",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/products/with-images",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "products", "with-images"]
+						},
+						"description": "Gets products with images (loads large data unnecessarily)"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Cached Products",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/products/cached",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "products", "cached"]
+						},
+						"description": "Gets cached products (may cause memory leak)"
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Products Async",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/products/async",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "products", "async"]
+						},
+						"description": "Gets products asynchronously (may cause resource exhaustion)"
+					},
+					"response": []
+				},
+				{
+					"name": "Product Health Check",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/products/health",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "products", "health"]
+						},
+						"description": "Checks the status of the product service"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Orders API",
+			"item": [
+				{
+					"name": "Get All Orders",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/orders",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "orders"]
+						},
+						"description": "Gets all orders (with performance issues - N+1 queries)"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Order by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/orders/{{orderId}}",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "orders", "{{orderId}}"]
+						},
+						"description": "Gets an order by ID (loads related data unnecessarily)"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Order",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"userId\": {{userId}},\n  \"totalAmount\": 199.99,\n  \"status\": \"PENDING\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/orders",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "orders"]
+						},
+						"description": "Creates a new order (generates large notes unnecessarily)"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Order",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"userId\": {{userId}},\n  \"totalAmount\": 249.99,\n  \"status\": \"CONFIRMED\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/orders/{{orderId}}",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "orders", "{{orderId}}"]
+						},
+						"description": "Updates an order (reloads data unnecessarily)"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Order",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/orders/{{orderId}}",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "orders", "{{orderId}}"]
+						},
+						"description": "Deletes an order (processes data before deletion)"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Orders by User ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/orders/user/{{userId}}",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "orders", "user", "{{userId}}"]
+						},
+						"description": "Gets orders by user ID (loads all related data)"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Orders by Status",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/orders/status/PENDING",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "orders", "status", "PENDING"]
+						},
+						"description": "Gets orders by status (loads all related data)"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Orders by Date Range",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/orders/date-range?startDate=2024-01-01T00:00:00&endDate=2024-12-31T23:59:59",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "orders", "date-range"],
+							"query": [
+								{
+									"key": "startDate",
+									"value": "2024-01-01T00:00:00"
+								},
+								{
+									"key": "endDate",
+									"value": "2024-12-31T23:59:59"
+								}
+							]
+						},
+						"description": "Gets orders by date range (loads unnecessary data)"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Orders by Min Amount",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/orders/min-amount?minAmount={{minAmount}}",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "orders", "min-amount"],
+							"query": [
+								{
+									"key": "minAmount",
+									"value": "{{minAmount}}"
+								}
+							]
+						},
+						"description": "Gets orders by minimum amount (loads all related data)"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Orders with Notes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/orders/with-notes",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "orders", "with-notes"]
+						},
+						"description": "Gets orders with notes (loads large data unnecessarily)"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Order with Items",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n  {\n    \"productId\": {{productId}},\n    \"quantity\": 2,\n    \"unitPrice\": 99.99\n  },\n  {\n    \"productId\": 2,\n    \"quantity\": 1,\n    \"unitPrice\": 29.99\n  }\n]"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/orders/with-items?userId={{userId}}",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "orders", "with-items"],
+							"query": [
+								{
+									"key": "userId",
+									"value": "{{userId}}"
+								}
+							]
+						},
+						"description": "Creates an order with items (processes all items individually)"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Cached Orders",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/orders/cached",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "orders", "cached"]
+						},
+						"description": "Gets cached orders (may cause memory leak)"
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Orders Async",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/orders/async",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "orders", "async"]
+						},
+						"description": "Gets orders asynchronously (may cause resource exhaustion)"
+					},
+					"response": []
+				},
+				{
+					"name": "Order Health Check",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/orders/health",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "orders", "health"]
+						},
+						"description": "Checks the status of the order service"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Health & Monitoring",
+			"item": [
+				{
+					"name": "Application Health",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/actuator/health",
+							"host": ["{{baseUrl}}"],
+							"path": ["actuator", "health"]
+						},
+						"description": "Checks the overall application health"
+					},
+					"response": []
+				},
+				{
+					"name": "Application Info",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/actuator/info",
+							"host": ["{{baseUrl}}"],
+							"path": ["actuator", "info"]
+						},
+						"description": "Gets application information"
+					},
+					"response": []
+				},
+				{
+					"name": "Application Metrics",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/actuator/metrics",
+							"host": ["{{baseUrl}}"],
+							"path": ["actuator", "metrics"]
+						},
+						"description": "Gets application metrics"
+					},
+					"response": []
+				},
+				{
+					"name": "Prometheus Metrics",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/actuator/prometheus",
+							"host": ["{{baseUrl}}"],
+							"path": ["actuator", "prometheus"]
+						},
+						"description": "Gets metrics in Prometheus format"
+					},
+					"response": []
+				},
+				{
+					"name": "H2 Database Console",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/h2-console",
+							"host": ["{{baseUrl}}"],
+							"path": ["h2-console"]
+						},
+						"description": "Access to the H2 database console"
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:8080",
+			"type": "string"
+		}
+	]
+}

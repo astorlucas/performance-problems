@@ -1,0 +1,16 @@
+D:\SOURCES\performance-problems\src\main\java\com\performance\api\entity\Product.java
+D:\SOURCES\performance-problems\src\main\java\com\performance\api\controller\OrderController.java
+D:\SOURCES\performance-problems\src\main\java\com\performance\api\entity\OrderItem.java
+D:\SOURCES\performance-problems\src\main\java\com\performance\api\repository\OrderRepository.java
+D:\SOURCES\performance-problems\src\main\java\com\performance\api\repository\UserRepository.java
+D:\SOURCES\performance-problems\src\main\java\com\performance\api\config\DataInitializer.java
+D:\SOURCES\performance-problems\src\main\java\com\performance\api\service\UserService.java
+D:\SOURCES\performance-problems\src\main\java\com\performance\api\repository\ProductRepository.java
+D:\SOURCES\performance-problems\src\main\java\com\performance\api\entity\Order.java
+D:\SOURCES\performance-problems\src\main\java\com\performance\api\PerformanceApiApplication.java
+D:\SOURCES\performance-problems\src\main\java\com\performance\api\entity\User.java
+D:\SOURCES\performance-problems\src\main\java\com\performance\api\service\OrderService.java
+D:\SOURCES\performance-problems\src\main\java\com\performance\api\controller\UserController.java
+D:\SOURCES\performance-problems\src\main\java\com\performance\api\repository\OrderItemRepository.java
+D:\SOURCES\performance-problems\src\main\java\com\performance\api\controller\ProductController.java
+D:\SOURCES\performance-problems\src\main\java\com\performance\api\service\ProductService.java

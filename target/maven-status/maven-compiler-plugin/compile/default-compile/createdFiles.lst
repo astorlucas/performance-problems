@@ -1,0 +1,17 @@
+com\performance\api\entity\User.class
+com\performance\api\controller\OrderController.class
+com\performance\api\repository\UserRepository.class
+com\performance\api\entity\Order.class
+com\performance\api\entity\Order$OrderStatus.class
+com\performance\api\config\DataInitializer.class
+com\performance\api\controller\ProductController.class
+com\performance\api\controller\UserController.class
+com\performance\api\entity\OrderItem.class
+com\performance\api\repository\OrderRepository.class
+com\performance\api\service\ProductService.class
+com\performance\api\repository\ProductRepository.class
+com\performance\api\repository\OrderItemRepository.class
+com\performance\api\service\UserService.class
+com\performance\api\service\OrderService.class
+com\performance\api\entity\Product.class
+com\performance\api\PerformanceApiApplication.class
