@@ -95,7 +95,7 @@ Listado completo de **endpoints** y parámetros, detalles de **autenticación** 
 Diseñar planes que consulten listados con gran cantidad de registros para revelar los problemas. Usar **Peticiones REST** que desencadenen estas consultas. Observar y concluír.
 
 **Pruebas de memoria**  
-Ejecutar un test de **endurance** con muchos hilos y **larga duración** usando **Loop Controller** y timers de **think time** para revelar los problemas. Monitorear **memoria** y **CPU** con el plugin **PerfMon**.
+Ejecutar un test de **endurance** con muchos hilos y **larga duración** usando **Loop Controller** y timers de **think time** para revelar los problemas. Monitorear **memoria** y **CPU** (con administrador de tareas).
 
 **Pruebas de concurrencia**  
 Crear un **Stress Test** que aumente progresivamente el número de hilos hasta saturar el **thread pool** o el **pool de conexiones**. Configurar **Thread Groups** con **ramp-up** y límites altos de usuarios.
@@ -154,7 +154,6 @@ Una explicación de cómo los **problemas de rendimiento** fueron implementados 
 - **Controla la carga:** Fija claramente **número de hilos**, **ramp‑up** y **duración** de cada test. Un aumento descontrolado de hilos puede esconder las causas verdaderas de un problema al generar errores en cascada.
 - **Assertions y fallos:** Configura **Assertions** en JMeter para detectar respuestas fuera de los límites de tus SLO. Un test que excede el tiempo máximo es **fallo** aunque devuelva código **200**.
 - **Uso de CLI y versionado:** Ejecuta JMeter en modo **no gráfico** (`-n`) y registra los **.jtl** generados. **Versiona** junto con los **.jmx** y scripts de ejecución para reproducibilidad.
-- **Monitoreo complementario:** Utiliza el plugin **PerfMon** de JMeter para medir consumo de recursos de hardware. Podrás relacionar tiempos altos con saturación de recursos.
 - **Consistencia de las métricas:** Interpreta **latencia + throughput + tasa de errores** en conjunto.
 - **Documenta todo:** registra cada decisión (por qué tantos hilos, por qué se activó un timer, etc.). Facilita el análisis y evita repetir errores.
 
