@@ -61,6 +61,7 @@ public class Product {
     
     // Performance issue: Unnecessary field that's always loaded
     @Column(name = "search_keywords")
+    @Size(max = 255)
     private String searchKeywords;
     
     public Product() {}

@@ -46,13 +46,16 @@ public class UserService {
     }
     
     public User createUser(User user) {
-        // Performance issue: Creates large profile data for every user
-        // Temporarily disabled for testing
-        // user.setProfileData(generateLargeProfileData());
+        // Performance issue: Creates large profile data for every user - ENHANCED
+        user.setProfileData(generateLargeProfileData());
         
-        // Performance issue: Adds to static cache without cleanup
-        // Temporarily disabled for testing
-        // userCache.add(user);
+        // Performance issue: Adds to static cache without cleanup - ENHANCED
+        userCache.add(user);
+        // Add multiple copies to make memory leak more noticeable
+        userCache.add(new User(user.getUsername() + "_copy1", user.getEmail(), 
+                             user.getFirstName(), user.getLastName()));
+        userCache.add(new User(user.getUsername() + "_copy2", user.getEmail(), 
+                             user.getFirstName(), user.getLastName()));
         
         return userRepository.save(user);
     }
@@ -109,25 +112,37 @@ public class UserService {
         return userRepository.findRecentUsersByEmailDomain(emailDomain, thirtyDaysAgo);
     }
     
-    // Performance issue: Method that creates memory leak
+    // Performance issue: Method that creates memory leak - ENHANCED
     private String generateLargeProfileData() {
         StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < 50000; i++) {
-            sb.append("Profile data line ").append(i).append(": This is a large profile data...\n");
+        // Increased from 50,000 to 200,000 iterations for more noticeable memory consumption
+        for (int i = 0; i < 200000; i++) {
+            sb.append("Profile data line ").append(i).append(": This is a large profile data...");
+            // Add more data per iteration
+            sb.append(" Additional user preferences and settings data...");
+            sb.append(" More detailed profile information that consumes significant memory...\n");
         }
         return sb.toString();
     }
     
-    // Performance issue: Inefficient processing method
+    // Performance issue: Inefficient processing method - ENHANCED
     private void processUserData(User user) {
-        // Performance issue: CPU-intensive operation
-        for (int i = 0; i < 1000; i++) {
+        // Performance issue: CPU-intensive operation - increased from 1000 to 5000 iterations
+        for (int i = 0; i < 5000; i++) {
             String processed = user.getUsername() + "_processed_" + i;
-            // Simulate processing
+            // Simulate more CPU-intensive processing
+            for (int j = 0; j < 50; j++) {
+                processed += "_subprocessed_" + j;
+                // Additional CPU work
+                Math.sqrt(i * j + 1);
+            }
         }
         
-        // Performance issue: Adds to static cache without cleanup
+        // Performance issue: Adds to static cache without cleanup - ENHANCED
         userCache.add(user);
+        // Add more copies to make memory leak more noticeable
+        userCache.add(new User(user.getUsername() + "_processed_copy", user.getEmail(), 
+                             user.getFirstName(), user.getLastName()));
     }
     
     // Performance issue: Inefficient duplicate removal
