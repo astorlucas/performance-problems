@@ -1,3 +1,5 @@
+Estos son cambios que estoy haciendo para probar la aprobación sobre el nuevo branch recientemente creado.
+
 # Guía para Crear Plan de Pruebas JMeter Manualmente
 
 Dado que el archivo XML está causando problemas de compatibilidad, te proporciono una guía paso a paso para crear el plan de pruebas manualmente en JMeter 5.6.3.
