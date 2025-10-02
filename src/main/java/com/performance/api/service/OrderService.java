@@ -153,11 +153,15 @@ public class OrderService {
         return order;
     }
     
-    // Performance issue: Method that creates memory leak
+    // Performance issue: Method that creates memory leak - ENHANCED
     private String generateLargeOrderNotes() {
         StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < 100000; i++) {
-            sb.append("Order note ").append(i).append(": This is a detailed note about the order...\n");
+        // Increased from 100,000 to 300,000 iterations for more noticeable memory consumption
+        for (int i = 0; i < 300000; i++) {
+            sb.append("Order note ").append(i).append(": This is a detailed note about the order...");
+            // Add more data per iteration
+            sb.append(" Additional order details and customer information...");
+            sb.append(" More comprehensive order tracking data that consumes significant memory...\n");
         }
         return sb.toString();
     }

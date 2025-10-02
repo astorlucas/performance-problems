@@ -164,4 +164,46 @@ public class ProductController {
     public ResponseEntity<String> healthCheck() {
         return ResponseEntity.ok("Product service is running");
     }
+    
+    @GetMapping("/stress-test")
+    public ResponseEntity<String> stressTest() {
+        try {
+            // Performance issue: ENHANCED - Triggers multiple performance problems at once
+            // This endpoint will cause significant CPU and memory consumption
+            
+            // 1. Load all products (N+1 queries)
+            List<Product> products = productService.getAllProducts();
+            
+            // 2. Process each product multiple times (CPU intensive)
+            for (int round = 0; round < 3; round++) {
+                for (Product product : products) {
+                    // Simulate heavy processing
+                    for (int i = 0; i < 1000; i++) {
+                        String processed = product.getName() + "_stress_" + round + "_" + i;
+                        Math.sqrt(i * round + 1);
+                    }
+                }
+            }
+            
+            // 3. Create additional products to trigger memory leaks
+            for (int i = 0; i < 10; i++) {
+                Product stressProduct = new Product(
+                    "Stress Test Product " + i,
+                    "This is a stress test product that will consume memory and CPU",
+                    new BigDecimal("99.99"),
+                    "Stress Test",
+                    100
+                );
+                productService.createProduct(stressProduct);
+            }
+            
+            // 4. Trigger async operations (thread pool exhaustion)
+            CompletableFuture<List<Product>> asyncProducts = productService.getAllProductsAsync();
+            
+            return ResponseEntity.ok("Stress test completed. Check memory and CPU usage!");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .body("Stress test failed: " + e.getMessage());
+        }
+    }
 }

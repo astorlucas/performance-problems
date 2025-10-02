@@ -101,7 +101,8 @@ Ejecutar un test de **endurance** con muchos hilos y **larga duración** usando 
 Crear un **Stress Test** que aumente progresivamente el número de hilos hasta saturar el **thread pool** o el **pool de conexiones**. Configurar **Thread Groups** con **ramp-up** y límites altos de usuarios.
 
 **Gestión de recursos**  
-Probar la saturación de **file handles** o **conexiones** abriendo y cerrando repetidas veces archivos o conexiones, y observando errores de agotamiento (**exhaustion**).
+Probar la saturación de **conexiones** (memoria heap) estableciendo y cerrando conexiones podemos replicar este comportamiento, y, por supuesto observando los errores de agotamiento (**exhaustion**).
+- Se proporciona un archivo dentro del respositorio, llamado: JMETER-GUÍA-GESTIÓN-RECURSOS.md el objetivo de este es proporcionar un paso a paso para generar los TestPlan correspondientes a este punto.
 
 **Servicios externos**  
 Usar un **Constant Timer** para simular **latencia alta** en llamadas a servicios externos, y configurar **Connection Timeout / Response Timeout** en JMeter para provocar **timeouts** controlados.
